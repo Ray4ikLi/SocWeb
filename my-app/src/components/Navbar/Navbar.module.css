@@ -1,0 +1,22 @@
+.nav {
+    grid-area: n;
+    background-color: black;
+    padding: 35px 50px;
+    margin-right: 3px;
+}
+
+.item a {
+    color: white;
+    text-decoration: none;
+}
+
+.item:hover{
+    background-color: dimgray;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+
+.item {
+    padding-bottom: 15px;
+}
