@@ -1,5 +1,6 @@
-import React from "react";
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = () => {
+
+ }
 
 
 let state = {
@@ -32,20 +33,24 @@ let state = {
 
 window.state = state
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost = {
         id: 3,
         message: state.ProfilePage.newPostText,
         likesCount: 0,
     };
     state.ProfilePage.posts.push(newPost);
+    state.ProfilePage.newPostText = '';
     rerenderEntireTree(state)
 }
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
     state.ProfilePage.newPostText = newText;
     rerenderEntireTree(state)
 }
 
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer; // паттерн = наблюдатель = обсервер //
+}
 
 export default state;
