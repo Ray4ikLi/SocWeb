@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 let store = {
     _state: {
         MessagesPage: {
@@ -26,32 +29,37 @@ let store = {
             ]
         },
     },
-    getState() {
-        return this._state
-    },
     _callSubscriber() {
         console.log('asdsadas')
     },
-    addPost() {
-        let newPost = {
-            id: 3,
-            message: this._state.ProfilePage.newPostText,
-            likesCount: 0,
-        };
-        this._state.ProfilePage.posts.push(newPost);
-        this._state.ProfilePage.newPostText = '';
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText) {
-        this._state.ProfilePage.newPostText = newText;
-        this._callSubscriber(this._state)
+
+    getState() {
+        return this._state
     },
     subscribe(observer) {
         this._callSubscriber = observer; // паттерн = наблюдатель = обсервер // asdsad
-    }
+    },
 
+    dispatch(action) {  //action = object(объект)  { type:' ADD-POST ' }
+        if ( action.type === ADD_POST ) {
+            let newPost = {
+                id: 3,
+                message: this._state.ProfilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.ProfilePage.posts.push(newPost);
+            this._state.ProfilePage.newPostText = '';
+            this._callSubscriber(this._state)
+                } else if (action.type === UPDATE_NEW_POST_TEXT) {
+                     this._state.ProfilePage.newPostText = action.newText;
+                     this._callSubscriber(this._state)
+        }
+    }
 }
 
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const updateNewPostTextActionCreator = (text) => ({
+        type: UPDATE_NEW_POST_TEXT, newText: text})
 export default store;
 
 window.state = store;
