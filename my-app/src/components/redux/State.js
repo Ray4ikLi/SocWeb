@@ -1,3 +1,7 @@
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
@@ -17,14 +21,14 @@ let store = {
                 {id: 3, name: 'Паша'},
                 {id: 4, name: 'Максим'},
             ],
-            newMessageBody: 'Enter text',
+            newMessageBody: '',
         },
         ProfilePage: {
             posts: [
                 {id: 1, message: 'Hi, how are you?', likesCount: 11},
                 {id: 2, message: 'Its my first post', likesCount: 4},
             ],
-            newPostText: '',
+            newPostText: 'Enter text',
         },
         Sidebar: {
             friends: [
@@ -43,29 +47,12 @@ let store = {
         this._callSubscriber = observer; // паттерн = наблюдатель = обсервер // asdsad
     },
 
-    dispatch(action) {  //action = object(объект)  { type:' ADD-POST ' }
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 3,
-                message: this._state.ProfilePage.newPostText,
-                likesCount: 0
-            };
-            this._state.ProfilePage.posts.push(newPost);
-            this._state.ProfilePage.newPostText = '';
-            this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.ProfilePage.newPostText = action.newText;
-            this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-            this._state.MessagesPage.newMessageBody = action.body;
-            this._callSubscriber(this._state)
-        } else if (action.type === SEND_MESSAGE) {
-            let body = this._state.MessagesPage.newMessageBody;
-            this._state.MessagesPage.newMessageBody = '';
-            this._state.MessagesPage.MessagesData.push({id: 5, message: body});
+    dispatch(action) {
+        this._state.ProfilePage = profileReducer(this._state.ProfilePage, action)
+        this._state.MessagesPage = dialogsReducer(this._state.MessagesPage, action)
+        this._state.Sidebar = sidebarReducer(this._state.Sidebar, action)
             this._callSubscriber(this._state)
         }
-    }
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST})
