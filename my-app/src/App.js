@@ -7,7 +7,7 @@ import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import Users from "./components/UsersPage/UsersPage";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 
@@ -19,9 +19,9 @@ const App = (props) => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path="/me" element={ <Profile  />}/>
-                    <Route path='/im/*' element={ <DialogsContainer />}/>
-                    <Route path='/people' element={ <Users/> }/>
+                    <Route path="/me/*" element={ <Profile  />}/>
+                    <Route path='/im/' element={ <DialogsContainer />}/>
+                    <Route path='/people' element={ <UsersContainer/> }/>
                     <Route path='/feed' element={ <News/> }/>
                     <Route path='/music' element={ <Music/> }/>
                     <Route path='/settings' element={ <Settings/> }/>
