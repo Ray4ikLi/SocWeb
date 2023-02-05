@@ -1,7 +1,6 @@
 import Dialogs from "./Dialogs";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../redux/dialogs-reducer"
 import  {connect} from "react-redux";
-
 let mapStateToProps = (state) => {
     return {
         MessagesPage: state.MessagesPage
