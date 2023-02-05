@@ -15,6 +15,9 @@ const Navbar = () => {
                 <NavLink to='/feed'>Новости</NavLink>
             </div>
             <div className={s.item}>
+                <NavLink to='/people'>Люди</NavLink>
+            </div>
+            <div className={s.item}>
                 <NavLink to='/music'>Музыка</NavLink>
             </div>
             <div className={s.item}>
